@@ -163,10 +163,10 @@ void set_frequency(short dir)
   {
 
     //lcd.setCursor( 12 - und, 0);
-    lcd.setCursor(0,1);
-    lcd.print("                ");
-    lcd.setCursor(12 - und, 1);
-    lcd.write(STEPHIGHLIGHTSYMBOL);
+    lcd.setCursor(0,1);            // second line
+    lcd.print("                "); // clear line
+    lcd.setCursor(12 - und, 1);    // position the STEP symbol and
+    lcd.write(STEPHIGHLIGHTSYMBOL); // show it
     
 /*  Hz  | und
     1     1
@@ -220,7 +220,7 @@ void set_frequency(short dir)
     lcd.write(STEPHIGHLIGHTSYMBOL);
     
 
-  } else {
+  } else {  // the encoder button is not pressed, we're just retuning not changing the step
 
     if (dir == 1)
       vfo += radix;
@@ -271,8 +271,8 @@ void display_frequency()
 {
   uint16_t f, g;
 
-  lcd.clear();
-  delay(1);
+//  lcd.clear();
+//  delay(1);
   lcd.setCursor(1, 0);
 
   f = (vfo) / 1000000;    //variable is now vfo instead of 'frequency'
@@ -297,7 +297,7 @@ void display_frequency()
   if (f < 10)
     lcd.print('0');
   lcd.print(f);
-  lcd.print(" Hz");
+  lcd.print(" Hz ");
 
 //  lcd.setCursor(12 - und, 1);
 //  lcd.write(STEPHIGHLIGHTSYMBOL);
@@ -424,7 +424,7 @@ void loop()
     old_rit = rit;
     lcd.setCursor(0, 1);
     if (rit == 0) {
-      lcd.print("no RIT ");
+      lcd.print("0     ");
     } else {
       if (rit > 0) {
         lcd.print("+");
@@ -433,7 +433,7 @@ void loop()
       }
   
       lcd.print(abs(rit)); // max 3 chars
-      lcd.print("0  ");
+      lcd.print("0   ");
     }
 
     // since the RIT has changed, we have to update where we are receiving
@@ -501,7 +501,7 @@ void loop()
 
       lcd.setCursor(0, 1);
       if (rit == 0) {
-        lcd.print("no RIT ");
+        lcd.print(" 0    ");
       } else {
         if (rit > 0) {
           lcd.print("+");
